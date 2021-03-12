@@ -14,8 +14,12 @@ class Person
     private ?string $death_country;
 
     private ?int $gold_count;
-
     private $placements;
+
+    public function getFullname() :string
+    {
+        return "$this->name $this->surname";
+    }
 
     /**
      * @return int
@@ -23,6 +27,14 @@ class Person
     public function getId(): int
     {
         return $this->id;
+    }
+
+    /**
+     * @param mixed $placements
+     */
+    public function setPlacements($placements): void
+    {
+        $this->placements = $placements;
     }
 
     /**
@@ -57,20 +69,5 @@ class Person
         $this->surname = $surname;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getPlacements()
-    {
-        return $this->placements;
-    }
-
-    /**
-     * @param mixed $placements
-     */
-    public function setPlacements($placements): void
-    {
-        $this->placements = $placements;
-    }
 
 }

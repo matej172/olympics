@@ -1,31 +1,32 @@
 <?php
-require_once "classes/controllers/PersonController.php";
-$personController = new PersonController();
 
+    require_once "classes/controllers/PersonController.php";
 
-if(isset($_POST['name'])) {
-    if(isset($_POST['id']) && $_POST['id']) {
-        $person = $personController->getPerson($_POST['id']);
-        $person->setName($_POST['name']);
-        $person->setSurname($_POST['surname']);
-        $personController->updatePerson($person);
+    $personController = new PersonController();
 
-    } else {
-        $person = new Person();
-        $person->setName($_POST['name']);
-        $person->setSurname($_POST['surname']);
-        $id = $personController->insertPerson($person);
-        $person = $personController->getPerson($id);
+    if(isset($_POST['name'])){
+        if($_POST['id']){
+            $person = $personController->getPerson($_POST['id']);
+            $person->setName($_POST['name']);
+            $person->setSurname($_POST['surname']);
+            $personController->updatePerson($person);
+
+        }else{
+            $person = new Person();
+            $person->setName($_POST['name']);
+            $person->setSurname($_POST['surname']);
+
+            $id = $personController->insertPerson($person);
+            $person = $personController->getPerson($id);
+        }
+
+    }else if(isset($_GET['id'])){
+        $person = $personController->getPerson($_GET['id']);
     }
 
-}
 
-if(isset($_GET['id'])){
-    $person = $personController->getPerson($_GET['id']);
-}
 
 ?>
-
 
 <!doctype html>
 

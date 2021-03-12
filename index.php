@@ -2,7 +2,7 @@
 require_once "classes/controllers/PersonController.php";
 
 $personController = new PersonController();
-
+$people = $personController->getAllPeople();
 ?>
 
 <!doctype html>
@@ -28,9 +28,12 @@ $personController = new PersonController();
 <body>
     <h1>OH</h1>
 
-    <pre>
-        <?php var_dump($personController->getPerson(1)); ?>
-    </pre>
+    <ul>
+        <?php foreach ($people as $person) {
+          echo "<li>".$person->getFullname()." <a href='editPerson.php?id=".$person->getId()."'>edit</a></li>";
+        }
+        ?>
+    </ul>
 
 
 </body>
